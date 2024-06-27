@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-// rimmel asghar
 @Slf4j
 @RestControllerAdvice
 public class ValidationAdvice {

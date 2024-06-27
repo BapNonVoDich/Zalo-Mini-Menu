@@ -1,4 +1,4 @@
-package com.zalominimenu.springboot.utils;
+package com.zalominimenu.springboot.constant;
 
 import java.util.Locale;
 

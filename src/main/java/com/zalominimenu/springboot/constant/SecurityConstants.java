@@ -1,4 +1,4 @@
-package com.zalominimenu.springboot.security.utils;
+package com.zalominimenu.springboot.constant;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

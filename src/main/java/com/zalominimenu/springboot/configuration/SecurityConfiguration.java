@@ -3,6 +3,7 @@ package com.zalominimenu.springboot.configuration;
 import com.zalominimenu.springboot.security.jwt.JwtAuthenticationFilter;
 import com.zalominimenu.springboot.security.jwt.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,20 +32,14 @@ public class SecurityConfiguration {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-		//@formatter:off
-
 		return http.cors().and().csrf().disable()
 				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests()
-				.antMatchers("/register","/health","/login","/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/actuator/**").permitAll()
+				.antMatchers("/health","/v1/auth/login","/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/actuator/**").permitAll()
 				.anyRequest().authenticated().and()
 				.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and().build();
-
-		//@formatter:on
+				.and()
+				.build();
 	}
-
-
 }

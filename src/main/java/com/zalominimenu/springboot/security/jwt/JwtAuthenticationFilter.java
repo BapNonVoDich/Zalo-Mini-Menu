@@ -1,7 +1,6 @@
 package com.zalominimenu.springboot.security.jwt;
 
-import com.zalominimenu.springboot.security.service.UserDetailsServiceImpl;
-import com.zalominimenu.springboot.security.utils.SecurityConstants;
+import com.zalominimenu.springboot.constant.SecurityConstants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -20,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
-// rimmel asghar
 @Slf4j
 @Service
 @RequiredArgsConstructor

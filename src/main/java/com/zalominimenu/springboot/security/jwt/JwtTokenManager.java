@@ -4,34 +4,42 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.zalominimenu.springboot.dto.auth.AuthToken;
+import com.zalominimenu.springboot.enums.TokenType;
 import com.zalominimenu.springboot.model.User;
-import com.zalominimenu.springboot.model.UserRole;
+import com.zalominimenu.springboot.enums.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-// rimmel asghar
 @Component
 @RequiredArgsConstructor
 public class JwtTokenManager {
 
 	private final JwtProperties jwtProperties;
 
-	public String generateToken(User user) {
+	public String generateToken(User user, TokenType tokenType, Long expiresInMinutes) {
 
 		final String username = user.getUsername();
 		final UserRole userRole = user.getUserRole();
 
-		//@formatter:off
 		return JWT.create()
 				.withSubject(username)
 				.withIssuer(jwtProperties.getIssuer())
 				.withClaim("role", userRole.name())
+				.withClaim("type", tokenType.name())
 				.withIssuedAt(new Date())
-				.withExpiresAt(new Date(System.currentTimeMillis() + jwtProperties.getExpirationMinute() * 60 * 1000))
+				.withExpiresAt(new Date(System.currentTimeMillis() + expiresInMinutes * 60 * 1000))
 				.sign(Algorithm.HMAC256(jwtProperties.getSecretKey().getBytes()));
-		//@formatter:on
+	}
+
+	public AuthToken generateAuthToken(User user) {
+
+		final String accessToken = generateToken(user, TokenType.ACCESS, jwtProperties.getAccessExpirationMinute());
+		final String refreshToken = generateToken(user, TokenType.REFRESH, jwtProperties.getRefreshExpirationMinute());
+
+		return new AuthToken(accessToken, refreshToken, jwtProperties.getAccessExpirationMinute(), jwtProperties.getRefreshExpirationMinute());
 	}
 
 	public String getUsernameFromToken(String token) {

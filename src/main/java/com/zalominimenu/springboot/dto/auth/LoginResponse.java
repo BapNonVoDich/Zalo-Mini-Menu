@@ -1,15 +1,13 @@
-package com.zalominimenu.springboot.security.dto;
+package com.zalominimenu.springboot.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-// rimmel asghar
 @Getter
 @Setter
 @AllArgsConstructor
 public class LoginResponse {
-
-	private String token;
-
+	private AuthToken token;
+	private UserInfo user;
 }

@@ -1,4 +1,4 @@
-package com.zalominimenu.springboot.security.dto;
+package com.zalominimenu.springboot.dto.auth;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 
-// rimmel asghar
 @Getter
 @Setter
 @NoArgsConstructor

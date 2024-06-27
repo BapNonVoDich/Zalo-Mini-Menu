@@ -9,26 +9,11 @@
         <version>2.7.10</version>
     </parent>
 
-    <groupId>com.rimmelasghar</groupId>
-    <artifactId>springboot-boilerplate</artifactId>
-    <version>2.2.0</version>
-
-    <name>spring-boot-boilerplate</name>
-    <description>
-        Spring Boot Boilerplate is a starter kit. This project includes : Spring Boot(3.1.12), Spring Data JPA, Spring Validation, Spring Security +
-        JWT Token, PostgreSQL, Mapstruct, Lombok, Swagger
-    </description>
-
-    <developers>
-        <developer>
-            <name>Rimmel Asghar</name>
-            <email>rimmelasghar4@gmail.com</email>
-            <url>https://rimmelasghar.com</url>
-        </developer>
-    </developers>
-
+    <groupId>com.zalominimenu</groupId>
+    <artifactId>zalominimenu-springboot</artifactId>
+    <version>1.0.0</version>
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <jwt.version>4.3.0</jwt.version>
         <apache-commons.version>3.12.0</apache-commons.version>
         <openapi-swagger.version>1.6.15</openapi-swagger.version>
@@ -46,11 +31,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -99,6 +79,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
             <scope>provided</scope>
         </dependency>
 

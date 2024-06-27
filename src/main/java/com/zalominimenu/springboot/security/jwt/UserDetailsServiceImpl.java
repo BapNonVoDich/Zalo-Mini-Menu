@@ -1,7 +1,8 @@
-package com.zalominimenu.springboot.security.service;
+package com.zalominimenu.springboot.security.jwt;
 
-import com.zalominimenu.springboot.model.UserRole;
-import com.zalominimenu.springboot.security.dto.AuthenticatedUserDto;
+import com.zalominimenu.springboot.enums.UserRole;
+import com.zalominimenu.springboot.dto.auth.AuthenticatedUserDto;
+import com.zalominimenu.springboot.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.Objects;
 
-// rimmel asghar
 @Slf4j
 @Service
 @RequiredArgsConstructor

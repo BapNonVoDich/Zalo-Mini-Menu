@@ -1,18 +1,15 @@
 package com.zalominimenu.springboot.security.jwt;
 
-import com.zalominimenu.springboot.security.mapper.UserMapper;
-import com.zalominimenu.springboot.security.service.UserService;
+import com.zalominimenu.springboot.dto.auth.*;
+import com.zalominimenu.springboot.mapper.UserMapper;
+import com.zalominimenu.springboot.service.UserService;
 import com.zalominimenu.springboot.model.User;
-import com.zalominimenu.springboot.security.dto.AuthenticatedUserDto;
-import com.zalominimenu.springboot.security.dto.LoginRequest;
-import com.zalominimenu.springboot.security.dto.LoginResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
-// rimmel asghar
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -36,11 +33,11 @@ public class JwtTokenService {
 		final AuthenticatedUserDto authenticatedUserDto = userService.findAuthenticatedUserByUsername(username);
 
 		final User user = UserMapper.INSTANCE.convertToUser(authenticatedUserDto);
-		final String token = jwtTokenManager.generateToken(user);
-
+		final AuthToken token = jwtTokenManager.generateAuthToken(user);
+		final UserInfo userInfo = UserMapper.INSTANCE.convertToUserInfo(user);
 		log.info("{} has successfully logged in!", user.getUsername());
 
-		return new LoginResponse(token);
+		return new LoginResponse(token, userInfo);
 	}
 
 }

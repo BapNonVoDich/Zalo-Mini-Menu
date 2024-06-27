@@ -28,41 +28,40 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product saveProduct(Product product) {
-        Product existingProduct = getProductById(product.getProduct_id());
+        Product existingProduct = getProductById(product.getId());
 
         if (existingProduct==null) {
             Product newProduct = Product.builder()
-                    .Product_name(product.getProduct_name())
-                    .Description(product.getDescription())
-                    .Category_code(product.getCategory_code())
-                    .Imported_date(product.getImported_date())
-                    .End_date(product.getEnd_date())
-                    .Start_date(product.getStart_date())
-                    .Stock_quantity(product.getStock_quantity())
-                    .Store_code(product.getStore_code())
-                    .Product_id(product.getProduct_id())
-                    .Product_price(product.getProduct_price())
+                    .name(product.getName())
+                    .description(product.getDescription())
+                    .categoryId(product.getCategoryId())
+                    .price(product.getPrice())
+                    .stock(product.getStock())
+                    .startDate(product.getStartDate())
+                    .endDate(product.getEndDate())
+                    .importedDate(product.getImportedDate())
+                    .storeId(product.getStoreId())
+                    .imageUrl(product.getImageUrl())
                     .build();
-            ;
         }
 
         return productRepository.save(product);
     }
     @Override
     public void updateProduct(Product product) {
-        Product existingProduct = getProductById(product.getProduct_id());
+        Product existingProduct = getProductById(product.getId());
         if (existingProduct!=null) {
             Product newProduct = Product.builder()
-                    .Product_name(product.getProduct_name())
-                    .Description(product.getDescription())
-                    .Category_code(product.getCategory_code())
-                    .Imported_date(product.getImported_date())
-                    .End_date(product.getEnd_date())
-                    .Start_date(product.getStart_date())
-                    .Stock_quantity(product.getStock_quantity())
-                    .Store_code(product.getStore_code())
-                    .Product_id(product.getProduct_id())
-                    .Product_price(product.getProduct_price())
+                    .name(product.getName())
+                    .description(product.getDescription())
+                    .categoryId(product.getCategoryId())
+                    .price(product.getPrice())
+                    .stock(product.getStock())
+                    .startDate(product.getStartDate())
+                    .endDate(product.getEndDate())
+                    .importedDate(product.getImportedDate())
+                    .storeId(product.getStoreId())
+                    .imageUrl(product.getImageUrl())
                     .build();
             ;
         }

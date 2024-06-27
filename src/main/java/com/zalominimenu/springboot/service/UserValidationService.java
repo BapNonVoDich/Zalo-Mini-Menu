@@ -3,7 +3,6 @@ package com.zalominimenu.springboot.service;
 import com.zalominimenu.springboot.utils.ExceptionMessageAccessor;
 import com.zalominimenu.springboot.exceptions.RegistrationException;
 import com.zalominimenu.springboot.repository.UserRepository;
-import com.zalominimenu.springboot.security.dto.RegistrationRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,15 +20,6 @@ public class UserValidationService {
 	private final UserRepository userRepository;
 
 	private final ExceptionMessageAccessor exceptionMessageAccessor;
-
-	public void validateUser(RegistrationRequest registrationRequest) {
-
-		final String email = registrationRequest.getEmail();
-		final String username = registrationRequest.getUsername();
-
-		checkEmail(email);
-		checkUsername(username);
-	}
 
 	private void checkUsername(String username) {
 

@@ -1,5 +1,6 @@
 package com.zalominimenu.springboot.utils;
 
+import com.zalominimenu.springboot.constant.ProjectConstants;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;

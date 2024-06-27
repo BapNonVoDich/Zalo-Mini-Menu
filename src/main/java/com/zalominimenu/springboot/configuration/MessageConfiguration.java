@@ -1,6 +1,6 @@
 package com.zalominimenu.springboot.configuration;
 
-import com.zalominimenu.springboot.utils.ProjectConstants;
+import com.zalominimenu.springboot.constant.ProjectConstants;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

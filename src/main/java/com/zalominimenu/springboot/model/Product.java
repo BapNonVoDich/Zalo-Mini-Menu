@@ -1,5 +1,6 @@
 package com.zalominimenu.springboot.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,23 +12,43 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@Table
+@Entity
+@Table(name = "product")
 @Data
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-
     @Id
-    private Long Product_id;
-    private String Product_name;
-    private String Description;
-    private Long Product_price ;
-    private Long Category_code;
-    private Long Stock_quantity;
-    private Date Start_date;
-    private Date End_date;
-    private Date Imported_date;
-    private Long Store_code;
-    private String Image_path;
+    private Long id;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "price")
+    private Long price ;
+
+    @Column(name = "category_id")
+    private Long categoryId;
+
+    @Column(name = "stock")
+    private Long stock;
+
+    @Column(name = "start_date")
+    private Date startDate;
+
+    @Column(name = "end_date")
+    private Date endDate;
+
+    @Column(name = "imported_date")
+    private Date importedDate;
+
+    @Column(name = "store_id")
+    private Long storeId;
+
+    @Column(name = "image_url")
+    private String imageUrl;
 }

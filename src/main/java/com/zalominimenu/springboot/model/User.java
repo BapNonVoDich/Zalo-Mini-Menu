@@ -1,5 +1,6 @@
 package com.zalominimenu.springboot.model;
 
+import com.zalominimenu.springboot.enums.UserRole;
 import lombok.*;
 
 import javax.persistence.*;

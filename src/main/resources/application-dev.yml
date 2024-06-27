@@ -4,18 +4,14 @@ server:
   version: 1.0.0
   error:
     include-message: always
-  servlet:
-    context-path: /api
 
 spring:
-  profiles:
-    include: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/${MYSQL_DATABASE:world}?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
-    username: ${MYSQL_USER:root}
-    password: ${MYSQL_PASSWORD:dbpassword}
+    url: jdbc:postgresql://localhost:5432/${POSTGRES_DATABASE:zalominiapp}?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
   jpa:
-    database-platform: org.hibernate.dialect.MySQL55Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
       show-sql: true
@@ -29,6 +25,7 @@ spring:
 springdoc:
   show-actuator: true
   paths-to-match: /**
+  packages-to-scan: com.zalominimenu.springboot
 
 management:
   endpoint:
@@ -46,15 +43,13 @@ logging:
 
 jwt:
   secretKey: secret
-  issuer: ${JWT_ISSUER:https://github.com/rimmelasghar}
+  issuer: ${JWT_ISSUER:zalominiapp-menu}
   expirationMinute: 10
 
 swagger:
-  contact-name: Rimmel Asghar
-  contact-mail: ${SWAGGER_CONTACT_MAIL:rimmelasghar4@email.com}
-  contact-url: ${SWAGGER_CONTACT_URL:https://rimmelasghar.com}
-  app-name: ${SWAGGER_APP_NAME:Spring Boot Boilerplate Project}
-  app-description: "Spring Boot Boilerplate is a starter kit for developing production ready SpringBoot Applications. This project includes : Spring Boot(3.1.2), Spring Data JPA, Spring Validation, Spring Security + JWT Token, MySQL, Mapstruct, Lombok, Swagger "
+  contact-name: Zalominimenu
+  contact-mail: ${SWAGGER_CONTACT_MAIL:zalominimenu}
+  app-name: ${SWAGGER_APP_NAME:Mini menu project}
   app-version: ${SWAGGER_APP_VERSION:2.0.0}
   app-license-url: ${SWAGGER_APP_LICENSE_URL:https://www.apache.org/licenses/LICENSE-2.0.html}
   app-license: ${SWAGGER_APP_LICENSE:Apache 2.0}

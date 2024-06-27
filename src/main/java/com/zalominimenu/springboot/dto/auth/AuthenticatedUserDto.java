@@ -1,11 +1,10 @@
-package com.zalominimenu.springboot.security.dto;
+package com.zalominimenu.springboot.dto.auth;
 
-import com.zalominimenu.springboot.model.UserRole;
+import com.zalominimenu.springboot.enums.UserRole;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-// rimmel asghar
 @Getter
 @Setter
 @NoArgsConstructor
