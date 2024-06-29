@@ -1,6 +1,5 @@
-package com.zalominimenu.springboot.dto.auth;
+package com.zalominimenu.springboot.dto.admin_portal.auth;
 
-import com.zalominimenu.springboot.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

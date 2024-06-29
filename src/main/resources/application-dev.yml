@@ -44,7 +44,8 @@ logging:
 jwt:
   secretKey: secret
   issuer: ${JWT_ISSUER:zalominiapp-menu}
-  expirationMinute: 10
+  accessExpirationMinute: 999999
+  refreshExpirationMinute: 999999
 
 swagger:
   contact-name: Zalominimenu

@@ -1,4 +1,4 @@
-package com.zalominimenu.springboot.dto.auth;
+package com.zalominimenu.springboot.dto.admin_portal.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

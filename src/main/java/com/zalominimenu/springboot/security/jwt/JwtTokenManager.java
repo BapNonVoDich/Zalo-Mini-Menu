@@ -4,10 +4,10 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.zalominimenu.springboot.dto.auth.AuthToken;
+import com.zalominimenu.springboot.dto.admin_portal.auth.AuthToken;
 import com.zalominimenu.springboot.enums.TokenType;
-import com.zalominimenu.springboot.model.User;
-import com.zalominimenu.springboot.enums.UserRole;
+import com.zalominimenu.springboot.enums.AdminRole;
+import com.zalominimenu.springboot.model.AdminUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,10 +19,9 @@ public class JwtTokenManager {
 
 	private final JwtProperties jwtProperties;
 
-	public String generateToken(User user, TokenType tokenType, Long expiresInMinutes) {
-
+	public String generateToken(AdminUser user, TokenType tokenType, Long expiresInMinutes) {
 		final String username = user.getUsername();
-		final UserRole userRole = user.getUserRole();
+		final AdminRole userRole = user.getRole();
 
 		return JWT.create()
 				.withSubject(username)
@@ -34,11 +33,9 @@ public class JwtTokenManager {
 				.sign(Algorithm.HMAC256(jwtProperties.getSecretKey().getBytes()));
 	}
 
-	public AuthToken generateAuthToken(User user) {
-
+	public AuthToken generateAuthToken(AdminUser user) {
 		final String accessToken = generateToken(user, TokenType.ACCESS, jwtProperties.getAccessExpirationMinute());
 		final String refreshToken = generateToken(user, TokenType.REFRESH, jwtProperties.getRefreshExpirationMinute());
-
 		return new AuthToken(accessToken, refreshToken, jwtProperties.getAccessExpirationMinute(), jwtProperties.getRefreshExpirationMinute());
 	}
 

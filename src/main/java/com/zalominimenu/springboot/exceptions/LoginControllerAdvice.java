@@ -1,6 +1,6 @@
 package com.zalominimenu.springboot.exceptions;
 
-import com.zalominimenu.springboot.controller.AuthController;
+import com.zalominimenu.springboot.controller.admin_portal.AuthController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -19,5 +19,4 @@ public class LoginControllerAdvice {
 
 		return ResponseEntity.status(response.getStatus()).body(response);
 	}
-
 }

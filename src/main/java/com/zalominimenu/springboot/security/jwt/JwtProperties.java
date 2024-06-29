@@ -18,6 +18,6 @@ import org.springframework.context.annotation.Configuration;
 public class JwtProperties {
 	private String issuer;
 	private String secretKey;
-	private long accessExpirationMinute;
-	private long refreshExpirationMinute;
+	private Long accessExpirationMinute;
+	private Long refreshExpirationMinute;
 }
