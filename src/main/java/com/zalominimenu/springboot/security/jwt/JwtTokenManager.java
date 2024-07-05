@@ -6,8 +6,6 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.zalominimenu.springboot.dto.admin_portal.auth.AuthToken;
 import com.zalominimenu.springboot.enums.TokenType;
-import com.zalominimenu.springboot.enums.AdminRole;
-import com.zalominimenu.springboot.model.AdminUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,38 +17,34 @@ public class JwtTokenManager {
 
 	private final JwtProperties jwtProperties;
 
-	public String generateToken(AdminUser user, TokenType tokenType, Long expiresInMinutes) {
-		final String username = user.getUsername();
-		final AdminRole userRole = user.getRole();
+	public String generateToken(Long id,String role, TokenType tokenType, Long expiresInMinutes) {
 
 		return JWT.create()
-				.withSubject(username)
+				.withSubject(id.toString())
 				.withIssuer(jwtProperties.getIssuer())
-				.withClaim("role", userRole.name())
+				.withClaim("role", role)
 				.withClaim("type", tokenType.name())
 				.withIssuedAt(new Date())
 				.withExpiresAt(new Date(System.currentTimeMillis() + expiresInMinutes * 60 * 1000))
 				.sign(Algorithm.HMAC256(jwtProperties.getSecretKey().getBytes()));
 	}
 
-	public AuthToken generateAuthToken(AdminUser user) {
-		final String accessToken = generateToken(user, TokenType.ACCESS, jwtProperties.getAccessExpirationMinute());
-		final String refreshToken = generateToken(user, TokenType.REFRESH, jwtProperties.getRefreshExpirationMinute());
+	public AuthToken generateAuthToken(Long userId, String role) {
+		final String accessToken = generateToken(userId,role, TokenType.ACCESS, jwtProperties.getAccessExpirationMinute());
+		final String refreshToken = generateToken(userId,role, TokenType.REFRESH, jwtProperties.getRefreshExpirationMinute());
 		return new AuthToken(accessToken, refreshToken, jwtProperties.getAccessExpirationMinute(), jwtProperties.getRefreshExpirationMinute());
 	}
 
-	public String getUsernameFromToken(String token) {
-
+	public String getSubjectFromToken(String token) {
 		final DecodedJWT decodedJWT = getDecodedJWT(token);
-
 		return decodedJWT.getSubject();
 	}
 
-	public boolean validateToken(String token, String authenticatedUsername) {
+	public boolean validateToken(String token, String authenticatedUserId) {
 
-		final String usernameFromToken = getUsernameFromToken(token);
+		final String userIdFromToken = getSubjectFromToken(token);
 
-		final boolean equalsUsername = usernameFromToken.equals(authenticatedUsername);
+		final boolean equalsUsername = userIdFromToken.equals(authenticatedUserId);
 		final boolean tokenExpired = isTokenExpired(token);
 
 		return equalsUsername && !tokenExpired;

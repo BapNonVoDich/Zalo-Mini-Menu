@@ -4,7 +4,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
-// rimmel asghar
 public class SecurityConstants {
 
 	// FIXME : Customize security constants for your application.
@@ -38,9 +37,9 @@ public class SecurityConstants {
 	 */
 	public static final String HEADER_STRING = "Authorization";
 
-	public static final String LOGIN_REQUEST_URI = "/login";
+	public static final String LOGIN_REQUEST_URI = "/auth/login";
 
-	public static final String REGISTRATION_REQUEST_URI = "/register";
+	public static final String REGISTRATION_REQUEST_URI = "/auth/register";
 
 	private SecurityConstants() {
 
@@ -57,5 +56,10 @@ public class SecurityConstants {
 
 		return userDetails.getUsername();
 	}
+
+	// ===================   ZALO   =========================
+
+	public static final String ZALO_ACCESS_TOKEN_HEADER_STRING = "zalo_access_token";
+	public static final String ZALO_PHONE_NUMBER_TOKEN_HEADER_STRING = "zalo_phone_number_token";
 
 }

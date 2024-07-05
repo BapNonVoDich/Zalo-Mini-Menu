@@ -1,10 +1,10 @@
 package com.zalominimenu.springboot.dto.admin_portal.auth;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Setter

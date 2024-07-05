@@ -1,32 +1,36 @@
 package com.zalominimenu.springboot.model;
 
-import com.zalominimenu.springboot.enums.AdminRole;
+import com.zalominimenu.springboot.enums.CustomerRole;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString(callSuper = true)
-@Table(name = "admin_user")
-public class AdminUser extends BaseEntity {
+@SuperBuilder(toBuilder = true)
+@Table(name = "customer")
+public class Customer extends BaseEntity {
 	@Column(name = "name")
 	private String name;
 
 	@Column(unique = true, name = "username")
 	private String username;
 
-	@Column(name = "password")
-	private String password;
-
 	@Column(name = "email", unique = true)
 	private String email;
 
-	@Enumerated()
-	@Column(name = "role", columnDefinition = "smallint")
-	private AdminRole role;
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "role")
+	private CustomerRole role;
 
 	@Column(name = "active")
 	private boolean active;
+
+	@Column(name = "phone_number")
+	private String phoneNumber;
 }
