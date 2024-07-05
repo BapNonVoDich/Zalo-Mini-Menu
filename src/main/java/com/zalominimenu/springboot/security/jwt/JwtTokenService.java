@@ -31,13 +31,16 @@ public class JwtTokenService {
 	private final CustomerRepository customerRepository;
 
 	public LoginResponse getLoginResponse(LoginRequest loginRequest) {
+		log.info("test!");
 
 		final String username = loginRequest.getUsername();
 		final String password = loginRequest.getPassword();
 
 		final UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(username, password);
+		log.info("test1!");
 
 		authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+		log.info("test2!");
 
 		final AdminUser user = adminUserService.findByUsername(username);
 		final AuthToken token = jwtTokenManager.generateAuthToken(user.getId(), user.getRole().name());

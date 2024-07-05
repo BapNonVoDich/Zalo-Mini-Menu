@@ -9,6 +9,8 @@ import com.zalominimenu.springboot.service.admin_portal.AdminUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ import java.util.Optional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class UserDetailsServiceImpl {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
 	private static final String USERNAME_OR_PASSWORD_INVALID = "Invalid username or password.";
 
@@ -46,6 +48,19 @@ public class UserDetailsServiceImpl {
 			throw new UsernameNotFoundException(USERNAME_OR_PASSWORD_INVALID);
 		}
 		final CustomUserDetails userInfo = CustomerMapper.INSTANCE.convertToCustomUserDetails(user);
+
+		final SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getRole().toString());
+		userInfo.setAuthorities(Collections.singletonList(grantedAuthority));
+		return userInfo;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		final AdminUser user = adminUserService.findByUsername(username);
+		if (Objects.isNull(user)) {
+			throw new UsernameNotFoundException(USERNAME_OR_PASSWORD_INVALID);
+		}
+		final CustomUserDetails userInfo = AdminUserMapper.INSTANCE.convertToCustomUserDetails(user);
 
 		final SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getRole().toString());
 		userInfo.setAuthorities(Collections.singletonList(grantedAuthority));
