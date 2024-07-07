@@ -1,104 +1,93 @@
-![](https://github.com/rimmelasghar/SpringBoot-boilerPlate/blob/main/imgs/springboot-boilerplate.jpg)
+# backend_order_restaurant
 
-# Spring-Boot BoilerPlate
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+## Getting started
+
+To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+
+Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+
+## Add your files
+
+- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
+- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+
+```
+cd existing_repo
+git remote add origin https://gitlab.com/zalominiapp.com.vn/backend_order_restaurant.git
+git branch -M main
+git push -uf origin main
+```
+
+## Integrate with your tools
+
+- [ ] [Set up project integrations](https://gitlab.com/zalominiapp.com.vn/backend_order_restaurant/-/settings/integrations)
+
+## Collaborate with your team
+
+- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
+- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
+- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
+- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
+- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+
+## Test and Deploy
+
+Use the built-in continuous integration in GitLab.
+
+- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
+- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
+- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
+- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
+- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+
+***
+
+# Editing this README
+
+When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+
+## Suggestions for a good README
+
+Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+
+## Name
+Choose a self-explaining name for your project.
 
 ## Description
+Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
-Spring Boot Boilerplate is an advanced foundation designed to facilitate the development of robust, production-ready Spring Boot applications. This comprehensive project encompasses a cutting-edge technology stack, featuring Spring Boot (version 3.1.2), Spring Data JPA, Spring Validation, Spring Security with JWT Token support, MySQL integration, Mapstruct for seamless data mapping, Lombok for concise code generation, and Swagger for streamlined API documentation.
+## Badges
+On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Features](#features)
-- [Documentation](#documentation)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+## Visuals
+Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
 
 ## Installation
-```
-$ git clone https://github.com/rimmelasghar/SpringBoot-boilerPlate.git
-$ cd SpringBoot-boilerPlate
-```
+Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
-Make sure you have docker and docker-compose installed [docker installation guide](https://docs.docker.com/compose/install/)
-## Step 1: Configuration Setup
-create ```.env``` file in root folder.
-```
-DB_ROOT_PASSWORD=mySecretRootPass
-MYSQL_DATABASE=yourdbname
-MYSQL_USER=yourdbusername
-MYSQL_PASSWORD=dbpasswword
-JWT_ISSUER=https://github.com/rimmelasghar
-SWAGGER_CONTACT_MAIL=youremail
-SWAGGER_CONTACT_URL=yourwebsite
-SWAGGER_APP_NAME=Spring Boot Boilerplate Project
-SWAGGER_APP_VERSION=2.0.0
-SWAGGER_APP_LICENSE_URL=https://www.apache.org/licenses/LICENSE-2.0.html
-SWAGGER_APP_LICENSE=Apache 2.0
-```
-This .env file contains the essential environment variables needed for your application to run.
+## Usage
+Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Step 2: Build Docker Images
-Open a terminal or command prompt, navigate to your project's root folder, and run the following command to build the Docker images:
-```
-docker-compose build
-```
-This command will create Docker images based on the configurations defined in your docker-compose.yml file.
-## Step 3: Start Application
-After the Docker images are built, run the following command to start your application:
-```
-docker-compose up
-```
-Now, your application will be up and running. You can access it in your web browser at http://localhost:8000.
+## Support
+Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
 
+## Roadmap
+If you have ideas for releases in the future, it is a good idea to list them in the README.
 
-## Features
-
-1. **Spring Boot 3.1.2**: The application is built using the latest version of Spring Boot, providing a solid foundation for developing robust and efficient Spring applications.
-
-2. **Spring Data JPA**: Spring Data JPA simplifies database access using the Java Persistence API (JPA) and provides easy-to-use repositories for interacting with the database.
-
-3. **Spring Validation**: The application implements Spring Validation to ensure data integrity and validity, making it more reliable and secure.
-
-4. **Spring Security + JWT Token**: Spring Security is integrated into the application to handle authentication and authorization. It uses JSON Web Tokens (JWT) for secure token-based authentication.
-
-5. **MySQL**: The application is configured to use MySQL as the backend database, allowing for persistent data storage.
-
-6. **Mapstruct**: Mapstruct is used to simplify the mapping between DTOs (Data Transfer Objects) and entities, reducing boilerplate code and enhancing maintainability.
-
-7. **Lombok**: Lombok reduces the verbosity of Java code by providing annotations to automatically generate boilerplate code for getters, setters, constructors, etc.
-
-8. **Swagger**: The application includes Swagger, a powerful tool for documenting and testing APIs. Swagger UI provides an interactive API documentation that makes it easy for developers to understand and use the API endpoints.
-
-These features collectively form a strong foundation for developing production-ready Spring Boot applications, saving development time and effort and ensuring best practices are followed throughout the development process.
-
-## Documentation
-- Swagger UI:
-  ![](https://github.com/rimmelasghar/SpringBoot-boilerPlate/blob/main/imgs/swagger-1.jpg)
-- Get Request:
-  ![](https://github.com/rimmelasghar/SpringBoot-boilerPlate/blob/main/imgs/swagger-2.jpg)
-  
-  
 ## Contributing
+State if you are open to contributions and what your requirements are for accepting them.
 
-To contribute to this project, follow these steps:
+For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
 
-1. Fork this repository.
-2. Create a new branch: ```git checkout -b feature/your-feature```
-3. Make your changes and commit them: ```git commit -m 'Add some feature'```
-4. Push to the branch: ```git push origin feature/your-feature.```
-5. Submit a pull request.
+You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+
+## Authors and acknowledgment
+Show your appreciation to those who have contributed to the project.
 
 ## License
+For open source projects, say how it is licensed.
 
-This project is licensed under the MIT License.
-
-## Contact
-
-
-Reach out to me ```rimmelasghar4@gmail.com```
-
-made by Rimmel Asghar with ❤️
+## Project status
+If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
