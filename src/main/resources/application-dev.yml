@@ -1,0 +1,55 @@
+server:
+  port: 8080
+  environment: dev
+  version: 1.0.0
+  error:
+    include-message: always
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${POSTGRES_DATABASE:zalominiapp}?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: update
+        show-sql: true
+        format-sql: true
+        type: info
+        use-sql-comments: true
+
+springdoc:
+  swagger-ui:
+    enabled: true
+  show-actuator: false
+
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+
+logging:
+  level:
+    org.springframework: INFO
+    com.zalominimenu.springboot: INFO
+
+jwt:
+  secretKey: secret
+  issuer: ${JWT_ISSUER:zalominiapp-menu}
+  accessExpirationMinute: 999999
+  refreshExpirationMinute: 999999
+
+swagger:
+  contact-name: Zalominimenu
+  contact-mail: ${SWAGGER_CONTACT_MAIL:zalominimenu}
+  app-name: ${SWAGGER_APP_NAME:Mini menu project}
+  app-version: ${SWAGGER_APP_VERSION:2.0.0}
+  app-license-url: ${SWAGGER_APP_LICENSE_URL:https://www.apache.org/licenses/LICENSE-2.0.html}
+  app-license: ${SWAGGER_APP_LICENSE:Apache 2.0}
