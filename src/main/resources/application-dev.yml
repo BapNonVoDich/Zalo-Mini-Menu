@@ -7,9 +7,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/${POSTGRES_DATABASE:zalominiapp}?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
-    username: ${POSTGRES_USER:postgres}
-    password: ${POSTGRES_PASSWORD:postgres}
+    url: jdbc:postgresql://${POSTGRES_HOST:ep-dawn-forest-a1wk8uvb.ap-southeast-1.aws.neon.tech}:${POSTGRES_PORT:5432}/${POSTGRES_DATABASE:order-food}?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=true
+    username: ${POSTGRES_USER:order-food_owner}
+    password: ${POSTGRES_PASSWORD:f7ionU9aFpEY}
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
