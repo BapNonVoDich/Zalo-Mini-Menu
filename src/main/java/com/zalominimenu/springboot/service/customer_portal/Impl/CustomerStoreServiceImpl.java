@@ -22,8 +22,8 @@ public class CustomerStoreServiceImpl implements CustomerStoreService {
 
         Customer currentCustomer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-         Set<Customer> managers = new HashSet<>(
-                 Collections.singletonList(currentCustomer)
+        Set<Customer> managers = new HashSet<>(
+                Collections.singletonList(currentCustomer)
         );
         final Store store = new Store().builder()
                 .name(request.getName())
@@ -32,9 +32,50 @@ public class CustomerStoreServiceImpl implements CustomerStoreService {
                 .city(request.getCity())
                 .status(false)
                 .updatedBy(currentCustomer.getId())
+                .imagePath("src/main/resources/image/store")
                 .managers(managers)
                 .build();
-
         return storeRepository.save(store);
+    }
+
+    @Override
+    public List<Store> getAllStores() {
+        return storeRepository.findAll();
+    }
+
+    @Override
+    public Store getStoreById(Long id) {
+        return storeRepository.findById(id).get();
+    }
+
+    @Override
+    public Store updateStore(Store store) {
+        Store existingStore = getStoreById(store.getId());
+//        if (existingStore!=null) {
+//            Store newStore = Store.builder()
+//                    .Store_name(store.getStore_name())
+//                    .Address(store.getAddress())
+//                    .Address_city(store.getAddress_city())
+//                    .Address_district(store.getAddress_district())
+//                    .Address_ward(store.getAddress_ward())
+//                    .Store_id(store.getStore_id())
+//                    .Admin_id(store.getAdmin_id())
+//                    .Created_date(store.getCreated_date())
+//                    .End_date(store.getEnd_date())
+//                    .Joining_date(store.getJoining_date())
+//                    .Status(store.getStatus())
+//                    .build();
+//            ;
+//        }
+        if (existingStore!=null)
+            return storeRepository.save(store);
+        return existingStore;
+    }
+
+    @Override
+    public Store deleteStore(Long id) {
+        Store existingStore = getStoreById(id);
+        storeRepository.deleteById(id);
+        return existingStore;
     }
 }

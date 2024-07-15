@@ -33,6 +33,9 @@ public class Store extends BaseEntity {
 	@Column(name = "city")
 	private String city;
 
+	@Column(name = "image_path")
+	private String imagePath;
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "store_manager",
 			joinColumns = @JoinColumn(name = "store_id"),
