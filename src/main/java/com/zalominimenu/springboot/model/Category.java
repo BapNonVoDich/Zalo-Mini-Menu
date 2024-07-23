@@ -23,7 +23,4 @@ public class Category extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
-    @OneToMany
-    @JoinColumn(name = "product_id")
-    private Set<Product> productId;
 }

@@ -15,7 +15,7 @@ import java.util.Set;
 @ToString(callSuper = true)
 @SuperBuilder(toBuilder = true)
 @Table(name = "product")
-@Getter
+
 
 public class Product extends BaseEntity{
     @Column(name = "name")
@@ -24,14 +24,16 @@ public class Product extends BaseEntity{
     private String description;
     @Column(name = "price")
     private Long productPrice ;
-    @OneToMany
-    @JoinColumn(name = "category_id")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> category;
     @Column(name = "quantity")
     private Long stockQuantity;
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
-    @Column(name = "image")
-    private String imagePath;
+    @Column(name = "image_url")
+    private String imageURL;
 }

@@ -1,6 +1,6 @@
 package com.zalominimenu.springboot.service.customer_portal.Impl;
 
-import com.zalominimenu.springboot.dto.customer_portal.CreateStoreDTO;
+import com.zalominimenu.springboot.dto.customer_portal.requestDTO.StoreDTO;
 import com.zalominimenu.springboot.model.Customer;
 import com.zalominimenu.springboot.model.Store;
 import com.zalominimenu.springboot.repository.customer_portal.CustomerStoreRepository;
@@ -18,7 +18,7 @@ import java.util.*;
 public class CustomerStoreServiceImpl implements CustomerStoreService {
     private final CustomerStoreRepository storeRepository;
     @Override
-    public Store createStore(CreateStoreDTO request) {
+    public Store createStore(StoreDTO request) {
 
         Customer currentCustomer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -32,7 +32,7 @@ public class CustomerStoreServiceImpl implements CustomerStoreService {
                 .city(request.getCity())
                 .status(false)
                 .updatedBy(currentCustomer.getId())
-                .imagePath("src/main/resources/image/store")
+                .imageURL("src/main/resources/image/store")
                 .managers(managers)
                 .build();
         return storeRepository.save(store);
