@@ -1,8 +1,8 @@
 package com.zalominimenu.springboot.service.admin_portal;
 
+import com.zalominimenu.springboot.exceptions.RegistrationException;
 import com.zalominimenu.springboot.repository.admin_portal.AdminUserRepository;
 import com.zalominimenu.springboot.utils.ExceptionMessageAccessor;
-import com.zalominimenu.springboot.exceptions.RegistrationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

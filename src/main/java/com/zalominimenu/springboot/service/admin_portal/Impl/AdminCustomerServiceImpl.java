@@ -1,7 +1,6 @@
 package com.zalominimenu.springboot.service.admin_portal.Impl;
 
 import com.zalominimenu.springboot.dto.admin_portal.auth.RegisterCustomerDTO;
-import com.zalominimenu.springboot.model.AdminUser;
 import com.zalominimenu.springboot.model.Customer;
 import com.zalominimenu.springboot.repository.admin_portal.AdminCustomerRepository;
 import com.zalominimenu.springboot.security.jwt.CustomUserDetails;
@@ -9,7 +8,6 @@ import com.zalominimenu.springboot.service.admin_portal.AdminCustomerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Slf4j

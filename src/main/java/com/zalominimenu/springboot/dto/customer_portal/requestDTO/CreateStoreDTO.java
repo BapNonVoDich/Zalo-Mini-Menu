@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Length;
 
 
 @Data
-public class StoreDTO {
+public class CreateStoreDTO {
     @NotBlank(message = "Tên cửa hàng không được để trống")
     @Length(max = 50, message = "Tên cửa hàng không được quá 50 ký tự")
     private String name;
@@ -30,4 +30,6 @@ public class StoreDTO {
     @Length(max = 50, message = "Thành phố không được quá 50 ký tự")
     @Length(min = 2, message = "Thành phố không được ít hơn 2 ký tự")
     private String city;
+
+
 }

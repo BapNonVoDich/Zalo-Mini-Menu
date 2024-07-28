@@ -1,17 +1,17 @@
 package com.zalominimenu.springboot.service.customer_portal;
 
-import com.zalominimenu.springboot.dto.customer_portal.requestDTO.StoreDTO;
+import com.zalominimenu.springboot.dto.customer_portal.requestDTO.CreateStoreDTO;
+import com.zalominimenu.springboot.dto.customer_portal.requestDTO.UpdateStoreDTO;
 import com.zalominimenu.springboot.model.Store;
 
 import java.util.List;
 
 public interface CustomerStoreService {
-	Store createStore(StoreDTO request);
+	Store createStore(CreateStoreDTO request);
 	List<Store> getAllStores();
-
 	Store getStoreById(Long id);
 
-	Store updateStore(Store updatedStore);
+	Store updateStore(UpdateStoreDTO updatedStore);
 
-	Store deleteStore(Long id);
+	Long deleteStore(Long id);
 }

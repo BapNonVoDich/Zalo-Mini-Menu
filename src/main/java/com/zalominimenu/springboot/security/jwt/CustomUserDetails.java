@@ -1,7 +1,6 @@
 package com.zalominimenu.springboot.security.jwt;
 
 import lombok.Data;
-import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

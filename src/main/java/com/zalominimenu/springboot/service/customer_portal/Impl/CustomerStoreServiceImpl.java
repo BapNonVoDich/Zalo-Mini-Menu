@@ -1,6 +1,7 @@
 package com.zalominimenu.springboot.service.customer_portal.Impl;
 
-import com.zalominimenu.springboot.dto.customer_portal.requestDTO.StoreDTO;
+import com.zalominimenu.springboot.dto.customer_portal.requestDTO.CreateStoreDTO;
+import com.zalominimenu.springboot.dto.customer_portal.requestDTO.UpdateStoreDTO;
 import com.zalominimenu.springboot.model.Customer;
 import com.zalominimenu.springboot.model.Store;
 import com.zalominimenu.springboot.repository.customer_portal.CustomerStoreRepository;
@@ -18,7 +19,7 @@ import java.util.*;
 public class CustomerStoreServiceImpl implements CustomerStoreService {
     private final CustomerStoreRepository storeRepository;
     @Override
-    public Store createStore(StoreDTO request) {
+    public Store createStore(CreateStoreDTO request) {
 
         Customer currentCustomer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -40,42 +41,44 @@ public class CustomerStoreServiceImpl implements CustomerStoreService {
 
     @Override
     public List<Store> getAllStores() {
-        return storeRepository.findAll();
+        List<Store> storeList = storeRepository.findAll();
+        if (storeList!=null){
+            return storeList;
+        }
+        throw new IllegalStateException("Danh sách cửa hàng trống");
     }
 
     @Override
     public Store getStoreById(Long id) {
-        return storeRepository.findById(id).get();
+        Store store = storeRepository.findById(id).get();
+        if (store!=null){
+            return store;
+        }
+        throw new IllegalStateException("Cửa hàng không tồn tại!");
     }
 
+
+
     @Override
-    public Store updateStore(Store store) {
+    public Store updateStore(UpdateStoreDTO store) {
+
+        Customer currentCustomer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Store existingStore = getStoreById(store.getId());
-//        if (existingStore!=null) {
-//            Store newStore = Store.builder()
-//                    .Store_name(store.getStore_name())
-//                    .Address(store.getAddress())
-//                    .Address_city(store.getAddress_city())
-//                    .Address_district(store.getAddress_district())
-//                    .Address_ward(store.getAddress_ward())
-//                    .Store_id(store.getStore_id())
-//                    .Admin_id(store.getAdmin_id())
-//                    .Created_date(store.getCreated_date())
-//                    .End_date(store.getEnd_date())
-//                    .Joining_date(store.getJoining_date())
-//                    .Status(store.getStatus())
-//                    .build();
-//            ;
-//        }
-        if (existingStore!=null)
-            return storeRepository.save(store);
-        return existingStore;
+        if (existingStore!=null) {
+            existingStore.setUpdatedAt(new Date());
+            existingStore.setUpdatedBy(currentCustomer.getId());
+            existingStore.setAddress(store.getAddress());
+            existingStore.setCity(store.getCity());
+            existingStore.setDistrict(store.getDistrict());
+            existingStore.setWard(store.getWard());
+
+            return storeRepository.save(existingStore);
+        }
+        throw new IllegalStateException("Cửa hàng không tồn tại!");
     }
 
     @Override
-    public Store deleteStore(Long id) {
-        Store existingStore = getStoreById(id);
-        storeRepository.deleteById(id);
-        return existingStore;
+    public Long deleteStore(Long id) {
+            return storeRepository.deleteStoreById(id);
     }
 }

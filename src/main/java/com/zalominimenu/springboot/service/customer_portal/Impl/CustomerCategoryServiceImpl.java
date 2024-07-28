@@ -1,40 +1,41 @@
 package com.zalominimenu.springboot.service.customer_portal.Impl;
 
-import com.zalominimenu.springboot.dto.customer_portal.requestDTO.CategoryDTO;
+import com.zalominimenu.springboot.dto.customer_portal.requestDTO.CreateCategoryDTO;
+import com.zalominimenu.springboot.dto.customer_portal.requestDTO.UpdateCategoryDTO;
 import com.zalominimenu.springboot.model.Category;
 import com.zalominimenu.springboot.model.Customer;
 import com.zalominimenu.springboot.model.Store;
-import com.zalominimenu.springboot.repository.customer_portal.CategoryRepository;
+import com.zalominimenu.springboot.repository.customer_portal.CustomerCategoryRepository;
 import com.zalominimenu.springboot.repository.customer_portal.CustomerStoreRepository;
-import com.zalominimenu.springboot.service.customer_portal.CategoryService;
+import com.zalominimenu.springboot.service.customer_portal.CustomerCategoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class CategoryServiceImpl implements CategoryService {
-    private final CategoryRepository categoryRepository;
+public class CustomerCategoryServiceImpl implements CustomerCategoryService {
+    private final CustomerCategoryRepository categoryRepository;
     private final CustomerStoreRepository storeRepository;
-    @Override
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
-    }
-
 
     @Override
     public Category getCategoryById(Long id) {
-        return categoryRepository.findById(id).get();
+        Category existingCategory = categoryRepository.findById(id).get();
+        if (existingCategory!=null) {
+            return existingCategory;
+        }
+        throw new IllegalStateException("Danh mục không tồn tại");
     }
 
     @Override
-    public Category createCategory(CategoryDTO category, Long storeId) {
+    public Category createCategory(CreateCategoryDTO category) {
         Customer currentCustomer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Store store = storeRepository.findById(storeId).get();
+        Store store = storeRepository.findById(category.getStoreId()).get();
+        if (store==null) throw new IllegalStateException("Store không tồn tại");
         Category newCategory = Category.builder()
                 .categoryName(category.getCategoryName())
                 .description(category.getDescription())
@@ -47,7 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category updateCategory(Category updatedCategory) {
+    public Category updateCategory(UpdateCategoryDTO updatedCategory) {
         Customer currentCustomer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Category existingCategory = categoryRepository.findById(updatedCategory.getId()).get();
         if (existingCategory!=null) {
@@ -57,21 +58,11 @@ public class CategoryServiceImpl implements CategoryService {
             existingCategory.setUpdatedAt(new Date());
             return categoryRepository.save(existingCategory);
         }
-        return null;
+        throw new IllegalStateException("Danh mục không tồn tại");
     }
 
     @Override
-    public Category deleteCategory(Long id) {
-        Category existingCategory = categoryRepository.findById(id).get();
-        if (existingCategory!=null) {
-            categoryRepository.delete(existingCategory);
-            return existingCategory;
-        }
-        return null;
-    }
-
-    @Override
-    public List<Category> getAllCategoriesByStore(Long storeid) {
-        return categoryRepository.findAllByStoreId(storeid);
+    public Long deleteCategory(Long id) {
+        return categoryRepository.deleteCategoryById(id);
     }
 }

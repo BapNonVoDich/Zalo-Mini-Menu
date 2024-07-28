@@ -1,60 +1,59 @@
 package com.zalominimenu.springboot.service.customer_portal.Impl;
-import com.zalominimenu.springboot.dto.customer_portal.requestDTO.ProductDTO;
+
+import com.zalominimenu.springboot.dto.customer_portal.requestDTO.CreateProductDTO;
+import com.zalominimenu.springboot.dto.customer_portal.requestDTO.UpdateProductDTO;
 import com.zalominimenu.springboot.model.Category;
 import com.zalominimenu.springboot.model.Customer;
 import com.zalominimenu.springboot.model.Product;
 import com.zalominimenu.springboot.model.Store;
-import com.zalominimenu.springboot.repository.customer_portal.CategoryRepository;
+import com.zalominimenu.springboot.repository.customer_portal.CustomerCategoryRepository;
 import com.zalominimenu.springboot.repository.customer_portal.CustomerStoreRepository;
-import com.zalominimenu.springboot.repository.customer_portal.ProductRepository;
-import com.zalominimenu.springboot.service.customer_portal.ProductService;
+import com.zalominimenu.springboot.repository.customer_portal.CustomerProductRepository;
+import com.zalominimenu.springboot.service.customer_portal.CustomerProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ProductServiceImpl implements ProductService {
-    private final ProductRepository productRepository;
+public class CustomerProductServiceImpl implements CustomerProductService {
+    private final CustomerProductRepository productRepository;
     private final CustomerStoreRepository storeRepository;
-    private final CategoryRepository categoryRepository;
+    private final CustomerCategoryRepository categoryRepository;
 
     @Override
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        List<Product> products = productRepository.findAll();
+        if (products!=null){
+            return products;
+        }
+        throw new IllegalStateException("Danh sách cửa hàng trống!");
     }
 
 
     @Override
     public Product getProductById(Long id) {
-        return productRepository.findById(id).get();
+        Product product = productRepository.findById(id).get();
+        if (product!=null){
+            return product;
+        }
+        throw new IllegalStateException("Cửa hàng không tồn tại!");
     }
 
-    @Override
-    public List<Product> getProductsByCategory(Long category) {
-        return productRepository.findAllByCategoryId(category);
-    }
 
     @Override
-    public List<Product> getProductsByStore(Long id) {
-        return productRepository.findAllByStoreId(id);
-    }
-
-    @Override
-    public List<Product> getProductsByCategories(List<Long> ids) {
-        return productRepository.findAllByCategoryIdIn(ids);
-    }
-
-    @Override
-    public Product createProduct(ProductDTO product, Long storeId) {
+    public Product createProduct(CreateProductDTO product) {
             Customer currentCustomer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            Store store = storeRepository.findById(storeId).get();
+            Store store = storeRepository.findById(product.getStoreId()).get();
             Set<Category> categories = categoryRepository.findByIdIn(product.getCategoryIds());
-            Product newProduct = Product.builder()
+            if (categories==null||store==null) throw new IllegalStateException("Danh mục hoăc cửa hàng không tồn tại");
+            final Product newProduct = Product.builder()
                     .description(product.getDescription())
                     .stockQuantity(product.getStockQuantity())
                     .store(store)
@@ -67,9 +66,9 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.save(newProduct);
     }
     @Override
-    public Product updateProduct(ProductDTO product, Long productId) {
+    public Product updateProduct(UpdateProductDTO product) {
         Customer currentCustomer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Product existingProduct = productRepository.findById(productId).get();
+        Product existingProduct = productRepository.findById(product.getId()).get();
         Set<Category> categories = categoryRepository.findByIdIn(product.getCategoryIds());
         if (existingProduct!=null) {
             existingProduct.setProductPrice(product.getProductPrice());
@@ -81,16 +80,11 @@ public class ProductServiceImpl implements ProductService {
             existingProduct.setUpdatedBy(currentCustomer.getId());
             return productRepository.save(existingProduct);
         }
-        throw new IllegalStateException("product does not exist");
+        throw new IllegalStateException("Sản phẩm không tồn tại");
 
     }
     @Override
-    public Product deleteProduct(Long id) {
-        Product existingProduct = productRepository.findById(id).get();
-        if (existingProduct!=null) {
-            productRepository.delete(existingProduct);
-            return existingProduct;
-        }
-        throw new IllegalStateException("product does not exist");
+    public Long deleteProduct(Long id) {
+        return productRepository.deleteProductById(id);
     }
 }
