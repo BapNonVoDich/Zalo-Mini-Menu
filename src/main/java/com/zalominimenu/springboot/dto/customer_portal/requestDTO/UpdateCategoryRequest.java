@@ -5,7 +5,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 @Data
-public class UpdateCategoryDTO{
+public class UpdateCategoryRequest {
     @NotBlank(message = "ID không được để trống")
     private Long id;
     @NotBlank(message = "Tên không được để trống")

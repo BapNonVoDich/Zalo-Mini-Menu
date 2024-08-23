@@ -27,6 +27,7 @@ import java.util.Objects;
 public class CustomerJwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtTokenManager jwtTokenManager;
     private final CustomerRepository customerRepository;
+
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
@@ -43,21 +44,24 @@ public class CustomerJwtAuthenticationFilter extends OncePerRequestFilter {
             authToken = header.replace(SecurityConstants.TOKEN_PREFIX, StringUtils.EMPTY);
             try {
                 customerId = Long.parseLong(jwtTokenManager.getSubjectFromToken(authToken));
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 log.error("Authentication Exception : {}", e.getMessage());
             }
         }
         Customer c = customerRepository.findCustomerById(customerId);
+        if (Objects.isNull(c)) {
+            chain.doFilter(request, response);
+            return;
+        }
 
         CustomUserDetails userDetails = CustomerMapper.INSTANCE.convertToCustomUserDetails(c);
 
         final SecurityContext securityContext = SecurityContextHolder.getContext();
 
         if (Objects.isNull(securityContext.getAuthentication())) {
-                final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(c, null,userDetails.getAuthorities());
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                securityContext.setAuthentication(authentication);
+            final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(c, null, userDetails.getAuthorities());
+            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            securityContext.setAuthentication(authentication);
         }
         chain.doFilter(request, response);
     }

@@ -1,11 +1,11 @@
 package com.zalominimenu.springboot.utils;
 
-import com.zalominimenu.springboot.dto.BaseResponse;
+import com.zalominimenu.springboot.dto.BaseListResponse;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
 
 public class CustomResponseListEntity {
-    public static <T> ResponseEntity<BaseResponse<T>> ok(@Nullable T data, String message) {
-        return ResponseEntity.ok(new BaseResponse<>(data, message));
+    public static <T> ResponseEntity<BaseListResponse<T>> ok(Page<T> data, String message) {
+        return ResponseEntity.ok(new BaseListResponse<>(data, message));
     }
 }

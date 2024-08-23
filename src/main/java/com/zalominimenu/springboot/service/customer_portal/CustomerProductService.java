@@ -1,22 +1,21 @@
 package com.zalominimenu.springboot.service.customer_portal;
 
-import com.zalominimenu.springboot.dto.customer_portal.requestDTO.CreateProductDTO;
-import com.zalominimenu.springboot.dto.customer_portal.requestDTO.UpdateProductDTO;
+import com.zalominimenu.springboot.dto.customer_portal.requestDTO.CreateProductRequest;
+import com.zalominimenu.springboot.dto.customer_portal.requestDTO.ListProductRequest;
+import com.zalominimenu.springboot.dto.customer_portal.requestDTO.UpdateProductRequest;
 import com.zalominimenu.springboot.model.Product;
-
-import java.util.List;
+import lombok.NonNull;
+import org.springframework.data.domain.Page;
 
 public interface CustomerProductService {
 
-    List<Product> getAllProducts();
+    Page<Product> getListProducts(@NonNull ListProductRequest request);
 
     Product getProductById(Long id);
 
-    Product createProduct(CreateProductDTO Product);
+    Product createProduct(CreateProductRequest Product);
 
     Long deleteProduct(Long id);
 
-    Product updateProduct(UpdateProductDTO product);
-
-
+    Product updateProduct(UpdateProductRequest product);
 }

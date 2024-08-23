@@ -15,15 +15,13 @@ import java.util.Set;
 @ToString(callSuper = true)
 @SuperBuilder(toBuilder = true)
 @Table(name = "product")
-
-
-public class Product extends BaseEntity{
+public class Product extends BaseEntity {
     @Column(name = "name")
     private String productName;
     @Column(name = "description")
     private String description;
     @Column(name = "price")
-    private Long productPrice ;
+    private Long productPrice;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),

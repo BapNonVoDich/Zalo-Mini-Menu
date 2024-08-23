@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class UpdateStoreDTO extends CreateStoreDTO{
+public class UpdateStoreRequest extends CreateStoreRequest {
     @NotBlank(message = "ID không được để trống")
     private Long id;
 }

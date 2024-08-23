@@ -3,13 +3,16 @@ package com.zalominimenu.springboot.mapper;
 import com.zalominimenu.springboot.dto.customer_portal.responseDTO.ProductResponse;
 import com.zalominimenu.springboot.model.Product;
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
+import org.mapstruct.factory.Mappers;
+import org.springframework.data.domain.Page;
 
-import java.util.List;
-
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
-
+@Mapper
 public interface ProductMapper {
+    ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
+
     ProductResponse ProductToProductResponse(Product product);
-    List<ProductResponse> ProductsToProductResponses(List<Product> products);
+
+    default Page<ProductResponse> ProductsToProductResponses(Page<Product> products) {
+        return products.map(this::ProductToProductResponse);
+    }
 }

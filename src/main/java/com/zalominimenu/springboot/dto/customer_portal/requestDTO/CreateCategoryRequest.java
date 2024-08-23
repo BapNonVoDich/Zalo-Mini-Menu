@@ -5,7 +5,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 @Data
-public class CreateCategoryDTO {
+public class CreateCategoryRequest {
 
     @NotBlank(message = "Tên không được để trống")
     @Length(max = 50, message = "Tên không được quá 50 ký tự")

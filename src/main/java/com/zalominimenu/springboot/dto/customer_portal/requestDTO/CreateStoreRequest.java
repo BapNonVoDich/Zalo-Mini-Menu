@@ -3,10 +3,11 @@ package com.zalominimenu.springboot.dto.customer_portal.requestDTO;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.URL;
 
 
 @Data
-public class CreateStoreDTO {
+public class CreateStoreRequest {
     @NotBlank(message = "Tên cửa hàng không được để trống")
     @Length(max = 50, message = "Tên cửa hàng không được quá 50 ký tự")
     private String name;
@@ -31,5 +32,8 @@ public class CreateStoreDTO {
     @Length(min = 2, message = "Thành phố không được ít hơn 2 ký tự")
     private String city;
 
+    @NotBlank(message = "Hình ảnh không được để trống")
+    @URL(message = "Hình ảnh không đúng định dạng")
+    private String imageURL;
 
 }
