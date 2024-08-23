@@ -1,8 +1,13 @@
 package com.zalominimenu.springboot.model;
 
 import com.zalominimenu.springboot.enums.AdminRole;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 
 @EqualsAndHashCode(callSuper = true)

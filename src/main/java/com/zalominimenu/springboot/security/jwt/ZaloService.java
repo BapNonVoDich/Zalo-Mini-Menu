@@ -1,12 +1,10 @@
 package com.zalominimenu.springboot.security.jwt;
 
-import com.zalominimenu.springboot.dto.customer_portal.ZaloUserFromAccessToken;
 import com.zalominimenu.springboot.dto.customer_portal.ZaloUserPhoneNumberData;
 import com.zalominimenu.springboot.dto.customer_portal.ZaloUserPhoneNumberFromAccessToken;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Slf4j

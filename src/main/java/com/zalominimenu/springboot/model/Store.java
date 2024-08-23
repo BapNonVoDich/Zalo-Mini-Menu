@@ -1,8 +1,10 @@
 package com.zalominimenu.springboot.model;
 
-import com.zalominimenu.springboot.enums.CustomerRole;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
@@ -32,6 +34,9 @@ public class Store extends BaseEntity {
 
 	@Column(name = "city")
 	private String city;
+
+	@Column(name = "image_url")
+	private String imageURL;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "store_manager",
